@@ -1,0 +1,12 @@
+# Normalise to LF inside the repository, and check out with native endings -- except where native
+# endings would break something.
+* text=auto
+
+# A bash script with CRLF endings fails with "\r: command not found", and this repo is developed on
+# Windows where git would otherwise hand out CRLF. Force LF for anything the shell executes.
+*.sh text eol=lf
+
+# Keep these byte-exact.
+*.jar binary
+*.png binary
+*.ico binary

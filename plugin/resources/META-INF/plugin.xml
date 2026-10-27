@@ -1,0 +1,40 @@
+<idea-plugin>
+  <id>io.github.ih041011.ideabridge</id>
+  <name>IDEA Bridge</name>
+  <version>1.0.0</version>
+  <vendor url="https://github.com/ih041011">ih041011</vendor>
+
+  <description><![CDATA[
+    Gives a local agent read and write control of the running IDE over a loopback HTTP API
+    guarded by a token in <code>~/.ideabridge/</code>.
+
+    <p>Exposes the open projects, files and live editor buffers, undoable document edits, run
+    configurations with their console output, and the IDE's own error analysis. The listener
+    binds to <code>127.0.0.1</code> only, so nothing is reachable from another machine.</p>
+
+    <p>Useful where a tool integration is not available: this targets IntelliJ IDEA 2024.1
+    (build 241), which the official JetBrains MCP server plugin does not support.</p>
+
+    <p>A small client script ships with the plugin; the wire protocol is one JSON object per
+    request over <code>POST /cmd</code>, so anything that can speak HTTP can drive it.</p>
+  ]]></description>
+
+  <change-notes><![CDATA[
+    <b>1.0.0</b>
+    <ul>
+      <li>First release, for IntelliJ IDEA 2024.1 (build 241).</li>
+      <li>Projects, files and VFS commands, including glob listing and refresh.</li>
+      <li>Live editor buffers: open, read context, undoable multi-edit, save, close.</li>
+      <li>Run configurations: list, execute, stop, and read back the console.</li>
+      <li>Diagnostics from the IDE's own analyser, waiting for analysis to finish.</li>
+    </ul>
+  ]]></change-notes>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.lang</depends>
+  <idea-version since-build="241" until-build="241.*"/>
+
+  <applicationListeners>
+    <listener class="ideabridge.BridgeAppListener" topic="com.intellij.ide.AppLifecycleListener"/>
+  </applicationListeners>
+</idea-plugin>

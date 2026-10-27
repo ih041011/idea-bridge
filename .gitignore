@@ -1,0 +1,17 @@
+# Build output
+build/
+dist/
+
+# The demo project's compiled classes and per-machine IDE state
+demo-project/out/
+demo-project/.idea/workspace.xml
+demo-project/.idea/vcs.xml
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.log
+
+# Python bytecode
+__pycache__/
+*.pyc
